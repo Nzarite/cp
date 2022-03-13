@@ -13,5 +13,5 @@ int main()
     q.push(40);
     cout << q.front() << " " << q.back() << endl;
     cout << q.empty() << "\n";
-    cout << q.size();
+    cout << q.size() << "\n";
 }
