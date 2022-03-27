@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits.h>
 #include <queue>
 using namespace std;
 
@@ -141,6 +142,111 @@ int size_tree(Node *root) // time complexity O(n) auxiliary space O(h)
         return 0;
     return 1 + size_tree(root->left) + size_tree(root->right);
 }
+int max_tree_element(Node *root)
+{
+    if (root == NULL)
+        return INT_MIN;
+    return max(root->key, max(max_tree_element(root->left), max_tree_element(root->right)));
+}
+void print_leftView(Node *root)
+{
+    if (root == NULL)
+        return;
+    queue<Node *> q;
+    q.push(root);
+    while (!q.empty())
+    {
+        int count = q.size();
+        for (int i = 0; i < count; i++)
+        {
+            Node *curr = q.front();
+            q.pop();
+            if (i == 0)
+                cout << curr->key << " ";
+            if (curr->left)
+                q.push(curr->left);
+            if (curr->right)
+                q.push(curr->right);
+        }
+        cout << "\n";
+    }
+}
+bool is_childrenSumProperty(Node *root)
+{
+    if (!root)
+        return true;
+    if (!root->left && !root->right)
+        return true;
+    int sum = 0;
+    if (root->left)
+        sum += root->left->key;
+    if (root->right)
+        sum += root->right->key;
+    return (sum == root->key && is_childrenSumProperty(root->left) && is_childrenSumProperty(root->right));
+}
+bool is_balancedTree(Node *root)
+{
+    /*  // NAIVE SOLUTION O(N^2)
+    if (!root)
+        return true;
+    if (abs(height(root->left) - height(root->right)) > 1)
+        return false;
+    return (is_balancedTree(root->left) && is_balancedTree(root->right));
+    */
+    // EFFICIENT SOLUTION O(N)
+    if (!root)
+        return 0;
+    int lh = is_balancedTree(root->left);
+    if (lh == -1)
+        return -1;
+    int rh = is_balancedTree(root->right);
+    if (rh == -1)
+        return -1;
+    if (abs(lh - rh) > 1)
+        return -1;
+    else
+        return max(lh, rh) + 1;
+}
+int max_width(Node *root)
+{
+    if (root == NULL)
+        return 0;
+    queue<Node *> q;
+    q.push(root);
+    int res = 0;
+    while (!q.empty())
+    {
+        int count = q.size();
+        res = max(res, count);
+        for (int i = 0; i < count; i++)
+        {
+            Node *curr = q.front();
+            q.pop();
+            if (curr->left)
+                q.push(curr->left);
+            if (curr->right)
+                q.push(curr->right);
+        }
+    }
+    return res;
+}
+Node *prevv = NULL;
+Node *bt_to_dll(Node *root)
+{
+    if (!root)
+        return root;
+    Node *head = bt_to_dll(root->left);
+    if (prevv == NULL)
+        head = root;
+    else
+    {
+        root->left = prevv;
+        prevv->right = root;
+    }
+    prevv = root;
+    bt_to_dll(root->right);
+    return head;
+}
 int main()
 {
     Node *root = new Node(10);
@@ -168,6 +274,16 @@ int main()
     level_order_traversal_lBl_1(root);
     cout << "\n";
     // level_order_traversal_lBl_2(root);
-    cout << size_tree(root);
+    cout << size_tree(root) << "\n";
+
+    cout << max_tree_element(root);
     cout << "\n";
+
+    print_leftView(root);
+
+    cout << is_childrenSumProperty(root) << "\n";
+
+    cout << is_balancedTree(root) << "\n";
+
+    cout << max_width(root) << "\n";
 }
