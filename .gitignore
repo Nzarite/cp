@@ -31,6 +31,4 @@
 *.out
 *.app
 *.cph
-
 *.vscode
-settings.json
