@@ -12,7 +12,7 @@ struct Node
         right = NULL;
     }
 };
-void traverseSpiral_1(Node *root) // NAIVE SOLUTION O(N) EXTRA WORK DONE FOR PRINTING IN SPIRAL ORDER
+void traverseSpiral_1(Node *root) // NAIVE SOLUTION TIME COMPLEXITY O(N) EXTRA WORK DONE FOR PRINTING IN REVERSE ORDER
 {
     if (root == NULL)
         return;
@@ -48,7 +48,7 @@ void traverseSpiral_1(Node *root) // NAIVE SOLUTION O(N) EXTRA WORK DONE FOR PRI
         cout << endl;
     }
 }
-void traverseSpiral_2(Node *root)
+void traverseSpiral_2(Node *root)// EFFICIENT SOLUTION TIME COMPLEXITY O(N) ONLY PUSH AND POP OPERATION FOR AN ELEMENT
 {
     stack<struct Node *> s1;
     stack<struct Node *> s2;
