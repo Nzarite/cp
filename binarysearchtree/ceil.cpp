@@ -1,7 +1,7 @@
 #include <set>
 #include<iostream>
 using namespace std;
-void ceiling(int a[], int n){
+void ceiling(int a[], int n){ // time complexity nlogn
     cout << -1<<" ";
     set<int> s;
     s.insert(a[0]);
