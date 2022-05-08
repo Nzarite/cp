@@ -1,6 +1,6 @@
 #include <iostream>
 #include <limits.h>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 
 struct Node
@@ -247,6 +247,25 @@ Node *bt_to_dll(Node *root)
     bt_to_dll(root->right);
     return head;
 }
+void topview(Node *root, int xD, map<int, int> &mp) // printing the top view of a binary tree : timecomplexity O(nlogn)
+{                                                   // one can implement levelordertraversal also
+    if (root == NULL)
+        return;
+    if (mp.find(xD) == mp.end()) // only push item in map if it doesn't exists prior
+        mp[xD] = root->key;
+    topview(root->left, xD - 1, mp);
+    topview(root->right, xD + 1, mp);
+}
+void bottomview(Node *root, int xD, map<int, int> &mp) // printing the top view of a binary tree : timecomplexity O(nlogn)
+{                                                      // one can implement levelordertraversal also
+    if (root == NULL)
+        return;
+    // if (mp.find(xD) == mp.end()) // only push item in map if it doesn't exists prior
+    mp[xD] = root->key;
+
+    bottomview(root->left, xD - 1, mp);
+    bottomview(root->right, xD + 1, mp);
+}
 int main()
 {
     Node *root = new Node(10);
@@ -286,4 +305,15 @@ int main()
     cout << is_balancedTree(root) << "\n";
 
     cout << max_width(root) << "\n";
+
+    map<int, int> mp;
+    topview(root, 0, mp);
+    for (auto it : mp)
+        cout << it.second << " ";
+
+    cout << endl;
+
+    bottomview(root, 0, mp);
+    for (auto it : mp)
+        cout << it.second << " ";
 }
