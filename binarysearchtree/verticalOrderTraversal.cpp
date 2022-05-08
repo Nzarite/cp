@@ -9,12 +9,13 @@ struct Node{
         left = right = NULL;
     }
 };
-void vSum(Node* root, int xD, map<int,int> &mp){ // timecomplexity O(nlog(xD)) : xD is the total number of possible horizontal distances
+void vot(Node* root, int xD, map<int, vector<int>> &mp){ // preorder traversal timecomplexity : O(nlogxD)
+    // queue<pair<Node *, int>> q; // one can also do levelordertraversal
     if(root==NULL)
         return;
-    vSum(root->left, xD - 1, mp);
-    mp[xD] += root->key;
-    vSum(root->right, xD + 1, mp);
+    mp[xD].push_back(root->key);
+    vot(root->left, xD - 1, mp);
+    vot(root->right, xD + 1, mp);
 }
 int main()
 {
@@ -26,10 +27,12 @@ int main()
     root->right->left = new Node(53);
     root->right->right = new Node(60);
 
-    map<int,int> mp;
-    vSum(root, 0, mp);
-    for(auto sum: mp){
-        cout << sum.second<< " ";
+    map<int, vector<int>> mp;
+    vot(root,0,mp);
+    for(auto it: mp){
+        for(auto jt: it.second) // to print the vector
+            cout << jt << " ";
+        cout << endl;
     }
     return 0;
 }
