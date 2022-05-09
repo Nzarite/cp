@@ -36,9 +36,29 @@ class MinHeap
             swap(arr[i], arr[parent(i)]);
         }
     }
-    void minHeapify(int i)
+    void minHeapify(int i) //timecomplexity O(logn) auxiliary space O(h)
     {
         int lt = left(i), rt = right(i);
         int smallest = i;
+        if(lt<size && arr[lt]<arr[i])
+            smallest = lt;
+        if(rt<size && arr[rt]<arr[i])
+            smallest = rt;
+        if(smallest!=i){
+            swap(arr[i], arr[smallest]);
+            minHeapify(smallest);
+        }
+    }
+    int extractMin(){ //timecomplexity O(logn) auxiliary space O(h)
+        if(size==0)
+            return INT_MAX;
+        if(size==1){
+            size--;
+            return arr[0];
+        }
+        swap(arr[0], arr[size-1]);
+        size--;
+        minHeapify(0);
+        return arr[size];
     }
 };

@@ -1,3 +1,5 @@
+/* JAI JAI SHREE RAM */
+/* Author: heavychomder */
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -96,5 +98,5 @@ int main()
 
 void solve()
 {
-    cout << "hello world\n";
+    cout << "hello world!";
 }
