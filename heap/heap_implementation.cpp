@@ -61,4 +61,22 @@ class MinHeap
         minHeapify(0);
         return arr[size];
     }
+    void decreaseKey(int i, int x){ // timecomplexity O(logn)
+        arr[i] = x;
+        while(i && arr[parent(i)]>arr[i]){
+            swap(arr[parent(i)], arr[i]);
+            i = parent(i);
+        }
+    }
+    void dalitKey(int i){ // timecomplexity O(logn)
+        // swap(arr[i], arr[size - 1]); my logic asc101
+        // size--;
+        // minHeapify(i);
+        decreaseKey(i, INT_MIN);
+        extractMin();
+    }
+    void buildHeap(){
+        for (int i = (size - 2) / 2; i >= 0;i--)
+            minHeapify(i);
+    }
 };
