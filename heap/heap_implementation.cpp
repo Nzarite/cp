@@ -75,7 +75,7 @@ class MinHeap
         decreaseKey(i, INT_MIN);
         extractMin();
     }
-    void buildHeap(){
+    void buildHeap(){ // timecomplexity o(n)
         for (int i = (size - 2) / 2; i >= 0;i--)
             minHeapify(i);
     }
