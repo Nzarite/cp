@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-using namespace std;
 
 struct Node
 {
@@ -8,11 +7,6 @@ struct Node
 
 	Node(int val) : value(val), next(nullptr) {}
 };
-
-// Declaration of Map to keep
-// mark of visited Node
-map<Node*, bool> vis;
-bool flag = 0;
  
 bool tortoiseAndHare(Node* head)
 {
@@ -63,18 +57,18 @@ int main()
 
 	std::cout << "Should there be a loop? (Type Y or N for Yes and No, respectively) " << std::endl;
 	char tmpChar;
-	cin >> tmpChar;
+	std::cin >> tmpChar;
 	bool addLoop = (tmpChar == 'Y');
 
-	srand(time(0));
-	vector<int> values;
-    Node* head = new Node(rand());
+	std::srand(time(0));
+	std::vector<int> values;
+    Node* head = new Node(std::rand());
 	values.push_back(head->value);
 
     Node* tail = head;
 	for(int i=1; i < n; ++i)
 	{
-		int newVal = rand();
+		int newVal = std::rand();
 		values.push_back(newVal);
 		tail->next = new Node(newVal);
 		tail = tail->next;
@@ -97,10 +91,9 @@ int main()
 	bool result = tortoiseAndHare(head);
 
     if (result)
-        cout << "Loop detected.";
+        std::cout << "Loop detected." << std::endl;
     else
-        cout << "No loop was found.";
-    cout << endl;
+        std::cout << "No loop was found." << std::endl;
  
     return 0;
 }
