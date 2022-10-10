@@ -7,7 +7,7 @@ long long greatestCommonDivisor(long long a, long long b)
 
 int main()
 {
-	int a, b;
+	long long a, b;
 	std::cin >> a >> b;
 
 	long long gcd = greatestCommonDivisor(a, b);
