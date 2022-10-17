@@ -43,12 +43,11 @@ int gcd(int a, int b)
             b >>= 1;
  
         if (a > b)
-            swap(a, b); // Swap u and v.
+            swap(a, b);
  
         b = (b - a);
     }while (b != 0);
  
-    /* restore common factors of 2 */
     return a << k;
 }
  
